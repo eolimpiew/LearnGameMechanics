@@ -1,0 +1,80 @@
+print("setup leaderboard")
+
+local DataStoreService = game:GetService("DataStoreService")
+local goldDataStore = DataStoreService:GetDataStore("Gold")
+local logDataStore = DataStoreService:GetDataStore("Logs")
+local players = game:GetService("Players")
+local GOLD_ON_JOIN = 5.0
+local LOGS_ON_JOIN = 1.0
+
+local function leaderboardSetup(player)
+	local playerKey = "Player_" .. player.UserId
+	local leaderstats = Instance.new("Folder")
+	leaderstats.Name = "leaderstats"
+	leaderstats.Parent = player
+	
+	local gold = Instance.new("IntValue")
+	gold.Name = "Gold"
+	gold.Value = 0
+	gold.Parent = leaderstats
+	
+	local logs = Instance.new("IntValue")
+	logs.Name = "Logs"
+	logs.Value = 0
+	logs.Parent = leaderstats
+	
+	local updateSuccess, errorMessage = pcall(function ()
+		goldDataStore:UpdateAsync(playerKey, function (oldValue)
+			local newValue = oldValue or 0
+			newValue = newValue + GOLD_ON_JOIN	
+			gold.Value = newValue
+			return gold.Value		
+		end)
+	end)
+	
+	if not updateSuccess then
+		print(errorMessage)
+	else
+		print(player.Name .. " has " .. gold.Value)
+	end
+	
+	local updateSuccess, errorMessage = pcall(function ()
+		logDataStore:UpdateAsync(playerKey, function (oldValue)
+			local newValue = oldValue or 0
+			newValue = newValue + LOGS_ON_JOIN
+			logs.Value = newValue
+			return logs.Value		
+		end)
+	end)
+	
+	if not updateSuccess then
+		print(errorMessage)
+	else
+		print(player.Name .. " has " .. logs.Value)
+	end
+end
+
+function onPlayerLeave(player)
+	local playerKey = "Player_" .. player.UserId
+	local gold = player.leaderstats.Gold
+	local logs = player.leaderstats.Logs
+	print("player has earned ".. gold.Value .. " in gold and " .. logs.Value .. " in logs.")
+	
+	local updateSuccess, errorMessage = pcall(function ()
+		goldDataStore:UpdateAsync(playerKey, function (oldValue)
+			local newValue = oldValue or 0
+			newValue = gold.Value
+			return newValue		
+		end)
+	end)
+	
+	if not updateSuccess then
+		print(errorMessage)
+	else
+		print(player.Name .. " has saved " .. gold.Value)
+	end
+	
+end
+
+players.PlayerAdded:Connect(leaderboardSetup)
+players.PlayerRemoving:Connect(onPlayerLeave)
