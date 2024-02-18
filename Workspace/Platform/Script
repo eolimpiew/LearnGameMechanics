@@ -1,0 +1,21 @@
+print("elevator")
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local TweenService = game:GetService("TweenService")
+
+local function onPromptTriggered(prompt, player)
+	
+	if prompt.Name == "PlatformUpPrompt" then
+		local platform = prompt.Parent
+		local goal = {}
+		goal.CFrame = platform.CFrame + Vector3.new(0, 5, 0)		
+		local tweenInfo = TweenInfo.new(
+			1.0,
+			Enum.EasingStyle.Linear,
+			Enum.EasingDirection.In
+		)
+		local movePlatform = TweenService:Create(platform, tweenInfo, goal)
+		movePlatform:Play()
+	end
+end
+
+ProximityPromptService.PromptTriggered:Connect(onPromptTriggered)
