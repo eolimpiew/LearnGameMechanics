@@ -1,9 +1,11 @@
 # Learn Game Mechanics
 ## based on "Coding with Roblox Lua in 24 Hours: The Official Roblox Guide" published by Pearson
 
-# Workspace Scripts
+# Hour 15: Smoothly Animating Objects
 
-This script moves the platform up as described in Hour 15 of the Lua book, "Smoothly Animating Objects: Try it Yourself: Create Elevator Doors".
+## Workspace Scripts
+
+This script moves the platform up as described in the Try it Yourself: Create Elevator Doors section of the chapter.
 
 <img width="691" alt="Screenshot 2024-02-18 at 6 11 16 PM" src="https://github.com/eolimpiew/LearnGameMechanics/assets/135179303/828e22ab-fe2b-407f-9725-33e86d636c32">
 
@@ -11,5 +13,5 @@ This script moves the platform up as described in Hour 15 of the Lua book, "Smoo
 
 A simplified "Elevator door" was created as a platform to Tweenservice in this [script](Workspace/Platform/Script).
 
-# ServerScriptService
+## ServerScriptService
 
