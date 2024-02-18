@@ -9,7 +9,7 @@ This script moves the platform up as described in Hour 15 of the Lua book, "Smoo
 
 <img width="427" alt="Screenshot 2024-02-18 at 6 11 57 PM" src="https://github.com/eolimpiew/LearnGameMechanics/assets/135179303/ab1577c9-f830-46d8-a6df-ee8f5a57a6a3">
 
-A simplified "Elevator door" was created as a platform to Tweenservice in this script.
+A simplified "Elevator door" was created as a platform to Tweenservice in this [script](Workspace/Platform/Script).
 
 # ServerScriptService
 
